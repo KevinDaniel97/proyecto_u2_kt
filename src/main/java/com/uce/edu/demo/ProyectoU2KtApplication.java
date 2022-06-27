@@ -1,8 +1,6 @@
 package com.uce.edu.demo;
 
-
-import org.apache.log4j.LogManager;
-import org.jboss.logging.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
