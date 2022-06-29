@@ -9,18 +9,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.estudiante.service.IEstudianteJdbcService;
 import com.uce.edu.demo.estudiante.to.Estudiante;
-import com.uce.edu.demo.to.Persona;
+import com.uce.edu.demo.respository.modelo.Persona;
+import com.uce.edu.demo.service.IPersonaJdbcService;
+import com.uce.edu.demo.service.IPersonaJpaService;
+import com.uce.edu.demo.to.PersonaTo;
 
 @SpringBootApplication
 public class ProyectoU2KtApplication implements CommandLineRunner{
 	
 	private static Logger log =Logger.getLogger(ProyectoU2KtApplication.class);
 	
-	//@Autowired
-	//private IPersonaJdbcService iPersonaJdbcService;
+	@Autowired
+	private IPersonaJpaService iPersonaJpaService;
 	
 	@Autowired
-	private IEstudianteJdbcService estudianteJdbcService;
+	private IPersonaJdbcService iPersonaJdbcService;
+
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2KtApplication.class, args);
@@ -30,49 +34,37 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
-		Estudiante estudiante =new Estudiante();
-		estudiante.setId(2);
-		estudiante.setNombre("pepito");
-		estudiante.setApellido("Perez");
-		estudiante.setCedula("1725845869");
-		estudiante.setEdad(20);
-		
-		//insertar
-		this.estudianteJdbcService.guardar(estudiante);
-		log.info("Se ha guardado el estudiante: "+estudiante);
+		log.info("Dato conJPA: "+ this.iPersonaJpaService.buscarPorId(1));
 	
-		Estudiante estu1=new Estudiante();
-		estu1.setId(2);
-		estu1.setNombre("Kevin");
-		estu1.setEdad(21);
-		
-		//actualizar
-		this.estudianteJdbcService.actualizar(estu1);
-		log.info("Se ha actualizado un estudiante: "+estu1);
-		
-		//eliminar
-		this.estudianteJdbcService.eliminar(1);
-		log.info("Se ha eliminado un estudiante: "+estu1);
-
-		//buscar
-		log.info(this.estudianteJdbcService.buscar(2));
-		
-		
-		
-	/*	
+		/*PersonaTo per1=new PersonaTo();
+		per1.setId(3);
+		per1.setApellido("Toapanta");
+		*/
 		Persona persona =new Persona();
-		persona.setId(3);
+		persona.setId(10);
 		persona.setNombre("pepito");
-		persona.setApellido("Perez");
+		persona.setApellido("Toapanta");
+		
+		//Guardar
+		this.iPersonaJpaService.insertar(persona);
+		
+		Persona persona1 =new Persona();
+		persona1.setId(1);
+		persona1.setNombre("pepito");
+		persona1.setApellido("Toapanta");	
+		//Guardar
+		this.iPersonaJpaService.actualizar(persona1);
+		//Eliminar
+		this.iPersonaJpaService.eliminar(3);
+		
+		
+		
+		
 		
 		//insertar
 		//this.iPersonaJdbcService.guardar(persona);
 		
 		
-		Persona per1=new Persona();
-		per1.setId(3);
-		per1.setApellido("Toapanta");
 		//actualizar
 		//this.iPersonaJdbcService.actualizar(per1);
 		
@@ -80,9 +72,12 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 		//this.iPersonaJdbcService.eliminar(3);
 		
 		//buscar
-		this.iPersonaJdbcService.buscar(3);
-		LOG.info(this.iPersonaJdbcService.buscar(3));
-	*/
+		//this.iPersonaJdbcService.buscar(3);
+		//log.info(this.iPersonaJdbcService.buscar(3));
+		
+		//buscar Todos
+		//log.info("lista:"+this.iPersonaJdbcService.buscarTodos());
+	
 	}
 
 }

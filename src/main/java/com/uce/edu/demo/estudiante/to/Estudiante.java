@@ -7,6 +7,21 @@ public class Estudiante {
 	private String cedula;
 	private int edad;
 	
+	
+	
+	public Estudiante(int id, String nombre, String apellido, String cedula, int edad) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.cedula = cedula;
+		this.edad = edad;
+	}
+
+	public Estudiante() {
+	
+	}
+	
 	@Override
 	public String toString() {
 		return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
