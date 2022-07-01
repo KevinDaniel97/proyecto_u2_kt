@@ -1,10 +1,23 @@
-package com.uce.edu.demo.estudiante.to;
+package com.uce.edu.demo.estudiante.repository.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="estudiante")
 public class Estudiante {
+	@Id
+	@Column(name="id")
 	private int id;
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="apellido")
 	private String apellido;
+	@Column(name="cedula")
 	private String cedula;
+	@Column(name="edad")
 	private int edad;
 	
 	
@@ -61,7 +74,4 @@ public class Estudiante {
 	}
 	
 	
-	
-	
-
 }

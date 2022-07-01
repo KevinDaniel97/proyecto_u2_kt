@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.estudiante.to.Estudiante;
+import com.uce.edu.demo.estudiante.to.EstudianteTo;
 import com.uce.edu.demo.to.PersonaTo;
 
 
@@ -22,19 +22,19 @@ public class EstudianteJdbcRepositoryImpl implements IEstudianteJdbcRepository{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public void insertar(Estudiante e) {
+	public void insertar(EstudianteTo e) {
 
 		this.jdbcTemplate.update("insert into estudiante (id, nombre, apellido, cedula, edad)values(?,?,?,?,?)", 
 				new Object[] {e.getId(),e.getNombre(),e.getApellido(),e.getCedula(),e.getEdad()});
 	}
 
 	@Override
-	public Estudiante buscarPorId(int id) {
+	public EstudianteTo buscarPorId(int id) {
 		return this.jdbcTemplate.queryForObject("select * from estudiante where id=?", 
-				new Object[] {id},new BeanPropertyRowMapper<Estudiante>(Estudiante.class));
+				new Object[] {id},new BeanPropertyRowMapper<EstudianteTo>(EstudianteTo.class));
 	}
 	@Override
-	public void actualizar(Estudiante e) {
+	public void actualizar(EstudianteTo e) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update("update estudiante set nombre=?, edad=? where id=?",
 				new Object[] {e.getNombre(),e.getEdad(),e.getId()});

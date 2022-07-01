@@ -7,12 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
 import com.uce.edu.demo.estudiante.service.IEstudianteJdbcService;
-import com.uce.edu.demo.estudiante.to.Estudiante;
+import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
 import com.uce.edu.demo.respository.modelo.Persona;
 import com.uce.edu.demo.service.IPersonaJdbcService;
 import com.uce.edu.demo.service.IPersonaJpaService;
-import com.uce.edu.demo.to.PersonaTo;
 
 @SpringBootApplication
 public class ProyectoU2KtApplication implements CommandLineRunner{
@@ -20,10 +20,7 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	private static Logger log =Logger.getLogger(ProyectoU2KtApplication.class);
 	
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
-	
-	@Autowired
-	private IPersonaJdbcService iPersonaJdbcService;
+	private IEstudianteJpaService iEstudianteJpaService;
 
 	
 	public static void main(String[] args) {
@@ -34,49 +31,33 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		log.info("Dato conJPA: "+ this.iPersonaJpaService.buscarPorId(1));
-	
-		/*PersonaTo per1=new PersonaTo();
-		per1.setId(3);
-		per1.setApellido("Toapanta");
-		*/
-		Persona persona =new Persona();
-		persona.setId(10);
-		persona.setNombre("pepito");
-		persona.setApellido("Toapanta");
 		
+		//Buscar
+		log.info("Dato conJPA: "+ this.iEstudianteJpaService.buscarPorId(2));
+
+		Estudiante estudiante =new Estudiante();
+		estudiante.setId(15);
+		estudiante.setNombre("pepito");
+		estudiante.setApellido("Perez");
+		estudiante.setCedula("1725845869");
+		estudiante.setEdad(25);
 		//Guardar
-		this.iPersonaJpaService.insertar(persona);
+		this.iEstudianteJpaService.guardar(estudiante);
 		
-		Persona persona1 =new Persona();
-		persona1.setId(1);
-		persona1.setNombre("pepito");
-		persona1.setApellido("Toapanta");	
-		//Guardar
-		this.iPersonaJpaService.actualizar(persona1);
-		//Eliminar
-		this.iPersonaJpaService.eliminar(3);
-		
-		
-		
-		
-		
-		//insertar
-		//this.iPersonaJdbcService.guardar(persona);
-		
-		
+			
+		Estudiante estudiante1 =new Estudiante();
+		estudiante1.setId(6);
+		estudiante1.setNombre("pepito");
+		estudiante.setApellido("Toapanta");
+		estudiante1.setCedula("1725848569");	
 		//actualizar
-		//this.iPersonaJdbcService.actualizar(per1);
+		this.iEstudianteJpaService.actualizar(estudiante1);
 		
-		//eliminar
-		//this.iPersonaJdbcService.eliminar(3);
 		
-		//buscar
-		//this.iPersonaJdbcService.buscar(3);
-		//log.info(this.iPersonaJdbcService.buscar(3));
+		//Eliminar
+		this.iEstudianteJpaService.eliminar(11);
 		
-		//buscar Todos
-		//log.info("lista:"+this.iPersonaJdbcService.buscarTodos());
+
 	
 	}
 
