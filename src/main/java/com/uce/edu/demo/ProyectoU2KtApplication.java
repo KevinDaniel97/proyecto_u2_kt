@@ -21,7 +21,9 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	
 	@Autowired
 	private IEstudianteJpaService iEstudianteJpaService;
-
+	
+	@Autowired
+	private IPersonaJpaService iPersonaJpaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2KtApplication.class, args);
@@ -30,8 +32,36 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 		
+		//buscar
+		//log.info("Dato conJPA: "+ this.iPersonaJpaService.buscarPorId(10));
+	
+		//Guardar
+		Persona persona =new Persona();
+		//persona.setId(13);
+		persona.setNombre("usu");
+		persona.setApellido("apellido");
+		this.iPersonaJpaService.insertar(persona);
+		
+		//actualizar
+		Persona persona1 =new Persona();
+		persona1.setId(4);
+		persona1.setNombre("andreA");
+		persona1.setApellido("ToapantaA");	
+		//this.iPersonaJpaService.actualizar(persona1);
+		
+		//Eliminar
+		//this.iPersonaJpaService.eliminar(11);
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
 		//Buscar
 		log.info("Dato conJPA: "+ this.iEstudianteJpaService.buscarPorId(2));
 
@@ -57,7 +87,7 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 		//Eliminar
 		this.iEstudianteJpaService.eliminar(11);
 		
-
+*/
 	
 	}
 
