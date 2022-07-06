@@ -13,22 +13,30 @@ import javax.persistence.Table;
 public class Persona {
 
 	@Id
-	@Column(name= "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "name_generator")//no neseariamente el mismo nombre (name_generator)
-	@SequenceGenerator(name="name_generator",sequenceName = "pers_id_sec",allocationSize = 1)
+	@Column(name= "pers_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pers_id_sec")//no neseariamente el mismo nombre (name_generator)
+	@SequenceGenerator(name="pers_id_sec",sequenceName = "pers_id_sec",allocationSize = 1)
 	private Integer id;
-	@Column(name= "nombre")
+	
+	@Column(name= "pres_nombre")
 	private String nombre;
-	@Column(name="apellido")
+	@Column(name="pers_apellido")
 	private String apellido;
+	
+	@Column(name="pers_cedula")
+	private String cedula;
+
+	@Column(name="pers_genero")
+	private String genero;
+	
 	
 	
 	
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + "]";
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", genero=" + genero + "]";
 	}
-	
 	//SET y GET
 	public Integer getId() {
 		return id;
@@ -48,6 +56,23 @@ public class Persona {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+	
 	
 	
 }
