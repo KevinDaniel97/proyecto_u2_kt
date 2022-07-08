@@ -13,4 +13,9 @@ public interface IPersonaJpaRepository {
 	public void insertar(Persona persona);
 	public void actualizar(Persona persona);
 	public void eliminar(Integer id);
+	
+	public List<Persona> buscarPorNombre(String nombre);
+	public List<Persona> buscarPorGenero(String genero);
+
+	
 }

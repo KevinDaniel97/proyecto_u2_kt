@@ -35,66 +35,52 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		//buscar
+	//buscar
 		//log.info("Dato conJPA: "+ this.iPersonaJpaService.buscarPorCedula("100"));
 	
-		//Guardar
+	//Guardar
 		Persona persona =new Persona();
-		//persona.setId(13);
-		persona.setNombre("usu");
-		persona.setApellido("apellido");
+		persona.setNombre("Daniel2");
+		persona.setApellido("Toapanta2");
 		persona.setGenero("M");
-		persona.setCedula("111111111");
+		persona.setCedula("100000000005");
 		//this.iPersonaJpaService.insertar(persona);
 		
-		//actualizar
+	//actualizar
 		Persona persona1 =new Persona();
 		persona1.setId(4);
 		persona1.setNombre("andreA");
 		persona1.setApellido("ToapantaA");	
 		//this.iPersonaJpaService.actualizar(persona1);
 		
-		//Eliminar
+	//Eliminar
 		//this.iPersonaJpaService.eliminar(11);
 	
 		
-		//Buscar por cedula
+	//Buscar por cedula
 		//Persona p=this.iPersonaJpaService.buscarPorCedula("100");
 		//log.info("persona encontrada: "+p);
 		
-		List<Persona> listaPersona= this.iPersonaJpaService.buscarPorApellido("ToapantaA");
-		for(Persona item : listaPersona) {
+		log.info("personas buscadas por nombre ");
+		List<Persona> listaPersonaNombre= this.iPersonaJpaService.buscarPorNombre("Kevin2");
+		for(Persona item : listaPersonaNombre) {
 			log.info("persona: " +item);
 		}
 		
-	
-		/*
-		//Buscar
-		log.info("Dato conJPA: "+ this.iEstudianteJpaService.buscarPorId(2));
-
-		Estudiante estudiante =new Estudiante();
-		estudiante.setId(15);
-		estudiante.setNombre("pepito");
-		estudiante.setApellido("Perez");
-		estudiante.setCedula("1725845869");
-		estudiante.setEdad(25);
-		//Guardar
-		this.iEstudianteJpaService.guardar(estudiante);
-		
-			
-		Estudiante estudiante1 =new Estudiante();
-		estudiante1.setId(6);
-		estudiante1.setNombre("pepito");
-		estudiante.setApellido("Toapanta");
-		estudiante1.setCedula("1725848569");	
-		//actualizar
-		this.iEstudianteJpaService.actualizar(estudiante1);
+		log.info("personas buscadas por Genero (M) ");
+		List<Persona> listaPersonaGenero= this.iPersonaJpaService.buscarPorGenero("M");
+		for(Persona item2 : listaPersonaGenero) {
+			log.info("persona: " +item2);
+		}
 		
 		
-		//Eliminar
-		this.iEstudianteJpaService.eliminar(11);
 		
-*/
+		
+//		List<Persona> listaPersona= this.iPersonaJpaService.buscarPorApellido("apellido");
+//		for(Persona item : listaPersona) {
+//			log.info("persona: " +item);
+//		}
+		
 	
 	}
 
