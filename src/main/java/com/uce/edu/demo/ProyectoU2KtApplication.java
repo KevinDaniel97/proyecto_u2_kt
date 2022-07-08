@@ -35,6 +35,27 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		
+		
+		
+		
+	//busquedas por nombre y genero 
+	 
+	 
+		log.info("personas buscadas por nombre ");
+		List<Persona> listaPersonaNombre= this.iPersonaJpaService.buscarPorNombre("Kevin2");
+		for(Persona item : listaPersonaNombre) {
+			log.info("persona: " +item);
+		}
+		
+		log.info("personas buscadas por Genero (M) ");
+		List<Persona> listaPersonaGenero= this.iPersonaJpaService.buscarPorGenero("M");
+		for(Persona item2 : listaPersonaGenero) {
+			log.info("persona: " +item2);
+		}
+		
+		
+		
 	//buscar
 		//log.info("Dato conJPA: "+ this.iPersonaJpaService.buscarPorCedula("100"));
 	
@@ -61,25 +82,18 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 		//Persona p=this.iPersonaJpaService.buscarPorCedula("100");
 		//log.info("persona encontrada: "+p);
 		
-		log.info("personas buscadas por nombre ");
-		List<Persona> listaPersonaNombre= this.iPersonaJpaService.buscarPorNombre("Kevin2");
-		for(Persona item : listaPersonaNombre) {
+	
+		
+		
+	// Buscar por  Apellido
+		/*List<Persona> listaPersona= this.iPersonaJpaService.buscarPorApellido("apellido");
+		for(Persona item : listaPersona) {
 			log.info("persona: " +item);
 		}
-		
-		log.info("personas buscadas por Genero (M) ");
-		List<Persona> listaPersonaGenero= this.iPersonaJpaService.buscarPorGenero("M");
-		for(Persona item2 : listaPersonaGenero) {
-			log.info("persona: " +item2);
-		}
+		*/
+
 		
 		
-		
-		
-//		List<Persona> listaPersona= this.iPersonaJpaService.buscarPorApellido("apellido");
-//		for(Persona item : listaPersona) {
-//			log.info("persona: " +item);
-//		}
 		
 	
 	}
