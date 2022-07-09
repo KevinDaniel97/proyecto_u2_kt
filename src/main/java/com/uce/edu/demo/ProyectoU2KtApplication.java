@@ -35,37 +35,33 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		//Actualizar con JPQL
+		int resultado=this.iPersonaJpaService.actualizarPorApellido("FM", "apellido");
+		log.info("cantidad de registros actualizados: "+resultado);
 		
 		
+		//Eliminar con JPQL
+		int resultado2=this.iPersonaJpaService.eliminarPorGenero("M");
+		log.info("Cantidad de registros eliminados  "+ resultado2);
 		
-		
-	//busquedas por nombre y genero 
-	 
-	 
-		log.info("personas buscadas por nombre ");
-		List<Persona> listaPersonaNombre= this.iPersonaJpaService.buscarPorNombre("Kevin2");
-		for(Persona item : listaPersonaNombre) {
-			log.info("persona: " +item);
-		}
-		
-		log.info("personas buscadas por Genero (M) ");
-		List<Persona> listaPersonaGenero= this.iPersonaJpaService.buscarPorGenero("M");
-		for(Persona item2 : listaPersonaGenero) {
-			log.info("persona: " +item2);
-		}
-		
-		
-		
+	
 	//buscar
 		//log.info("Dato conJPA: "+ this.iPersonaJpaService.buscarPorCedula("100"));
 	
 	//Guardar
 		Persona persona =new Persona();
-		persona.setNombre("Daniel2");
-		persona.setApellido("Toapanta2");
+		persona.setNombre("juenito5");
+		persona.setApellido("teran5");
 		persona.setGenero("M");
-		persona.setCedula("100000000005");
+		persona.setCedula("10005");
 		//this.iPersonaJpaService.insertar(persona);
+		
+		Persona persona2 =new Persona();
+		persona2.setNombre("juenito6");
+		persona2.setApellido("teran6");
+		persona2.setGenero("F");
+		persona2.setCedula("10006");
+		//this.iPersonaJpaService.insertar(persona2);
 		
 	//actualizar
 		Persona persona1 =new Persona();
@@ -86,15 +82,12 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 		
 		
 	// Buscar por  Apellido
-		/*List<Persona> listaPersona= this.iPersonaJpaService.buscarPorApellido("apellido");
-		for(Persona item : listaPersona) {
-			log.info("persona: " +item);
-		}
-		*/
+//		List<Persona> listaPersona= this.iPersonaJpaService.buscarPorApellido("apellido");
+//		for(Persona item : listaPersona) {
+//			log.info("persona: " +item);
+//		}
+//	
 
-		
-		
-		
 	
 	}
 
