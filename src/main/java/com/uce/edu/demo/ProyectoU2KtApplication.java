@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,6 +14,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
 import com.uce.edu.demo.estudiante.service.IEstudianteJdbcService;
 import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
+import com.uce.edu.demo.prueba.modelo.Propietario;
+import com.uce.edu.demo.prueba.modelo.Vehiculo;
+import com.uce.edu.demo.prueba.service.IMatriculaGestorService;
+import com.uce.edu.demo.prueba.service.IPropietarioService;
+import com.uce.edu.demo.prueba.service.IVehiculoService;
 import com.uce.edu.demo.respository.modelo.Persona;
 import com.uce.edu.demo.service.IPersonaJdbcService;
 import com.uce.edu.demo.service.IPersonaJpaService;
@@ -22,10 +29,15 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	private static Logger log =Logger.getLogger(ProyectoU2KtApplication.class);
 	
 	@Autowired
-	private IEstudianteJpaService iEstudianteJpaService;
+	private IVehiculoService vehiculoService;
 	
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IPropietarioService propietarioService;
+	
+	@Autowired
+	private IMatriculaGestorService gestorService;
+	
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2KtApplication.class, args);
@@ -35,7 +47,31 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		//Actualizar con JPQL
+		//1
+				Vehiculo vehiculo = new Vehiculo();
+				vehiculo.setMarca("Chebrolet");
+				vehiculo.setPlaca("PRT393");
+				vehiculo.setPrecio(new BigDecimal(20000));
+				vehiculo.setTipo("L");
+				this.vehiculoService.insertar(vehiculo);
+				//2
+				vehiculo.setPrecio(new BigDecimal(40000));
+				vehiculo.setMarca("Chevrolet");
+				this.vehiculoService.actualizarPorApellido("L", "PLS14");
+				//3
+				Propietario pro = new Propietario();
+				pro.setApellido("Toapnata");
+				pro.setNombre("Kevin");
+				pro.setCedula("1725845869");
+				pro.setFechaNacimiento(LocalDateTime.now());
+				this.propietarioService.crear(pro);
+				//4
+				//this.gestorService.generar("1725845869", "PRT393");
+			
+		
+		
+		
+	/*	//Actualizar con JPQL
 		int resultado=this.iPersonaJpaService.actualizarPorApellido("FM", "apellido");
 		log.info("cantidad de registros actualizados: "+resultado);
 		
@@ -88,7 +124,7 @@ public class ProyectoU2KtApplication implements CommandLineRunner{
 //		}
 //	
 
-	
+	*/
 	}
 
 }
