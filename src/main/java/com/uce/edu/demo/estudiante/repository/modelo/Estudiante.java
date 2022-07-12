@@ -2,35 +2,35 @@ package com.uce.edu.demo.estudiante.repository.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="estudiante")
+@NamedQuery(name= "Estudiante.buscarPorCedula",query="SELECT p FROM Estudiante p WHERE p.cedula= :datoCedula ")
+@NamedQuery(name= "Estudiante.buscarPorEdad",query="SELECT p FROM Estudiante p WHERE p.edad= :datoEdad ")
+@NamedQuery(name= "Estudiante.buscarPorNombre",query="SELECT p FROM Estudiante p WHERE p.nombre= :datoNombre ORDER BY p ASC")
+
 public class Estudiante {
 	@Id
-	@Column(name="id")
+	@Column(name="Estu_id_sec")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Estu_id_sec")
+	@SequenceGenerator(name = "Estu_id_sec", sequenceName = "Estu_id_sec", allocationSize = 1)
 	private int id;
-	@Column(name="nombre")
+	@Column(name="estu_nombre")
 	private String nombre;
-	@Column(name="apellido")
+	@Column(name="estu_apellido")
 	private String apellido;
-	@Column(name="cedula")
+	@Column(name="estu_cedula")
 	private String cedula;
-	@Column(name="edad")
+	@Column(name="estu_edad")
 	private int edad;
-	
-	
-	
-	public Estudiante(int id, String nombre, String apellido, String cedula, int edad) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.cedula = cedula;
-		this.edad = edad;
-	}
 
+	
 	public Estudiante() {
 	
 	}

@@ -1,12 +1,17 @@
 package com.uce.edu.demo.estudiante.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
+import com.uce.edu.demo.respository.modelo.Persona;
 @Repository
 @Transactional
 public class EstidianteJpaRespositoryImpl implements IEstudianteJpaRepository{
@@ -35,5 +40,57 @@ public class EstidianteJpaRespositoryImpl implements IEstudianteJpaRepository{
 		this.entityManager.remove(estudiante);
 	}
 
+	@Override
+	public Estudiante busacarPorCedulaTyped(String cedula) {
+		TypedQuery<Estudiante> miTypèdQuery=this.entityManager.createQuery("SELECT p FROM Estudiante p WHERE p.cedula= :datoCedula",Estudiante.class);
+		miTypèdQuery.setParameter("datoCedula", cedula);
+		return miTypèdQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante busacarPorEdadTyped(Integer edad) {
+		TypedQuery<Estudiante> miTypèdQuery2=this.entityManager.createQuery("SELECT p FROM Estudiante p WHERE p.edad= :datoEdad",Estudiante.class);
+		miTypèdQuery2.setParameter("datoEdad", edad);
+		return miTypèdQuery2.getSingleResult();
+	}
+
+	@Override
+	public Estudiante busacarPorCedulaNamed(String cedula) {
+		Query myNamedQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorCedula");
+		myNamedQuery.setParameter("datoCedula", cedula);
+		return (Estudiante) myNamedQuery.getSingleResult();
+		
+	}
+
+	@Override
+	public Estudiante busacarPorEdadNamed(Integer edad) {
+		Query myNamedQuery2 = this.entityManager.createNamedQuery("Estudiante.buscarPorEdad");
+		myNamedQuery2.setParameter("datoEdad", edad);
+		return (Estudiante) myNamedQuery2.getSingleResult();
+	}
+
+	@Override
+	public Estudiante busacarPorCedulaTypedNamed(String cedula) {
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorCedula",Estudiante.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante busacarPorEdadTypedNamed(Integer edad) {
+		TypedQuery<Estudiante> myQuery2 = this.entityManager.createNamedQuery("Estudiante.buscarPorEdad",Estudiante.class);
+		myQuery2.setParameter("datoEdad", edad);
+		return myQuery2.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombre(String nombre) {
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorNombre",Estudiante.class);
+		myQuery.setParameter("datoNombre", nombre);
+		return myQuery.getResultList();
+	}
+
+
+	
 
 }
