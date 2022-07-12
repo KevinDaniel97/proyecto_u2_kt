@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,8 @@ public class PersonJpaRespositoryImpl implements IPersonaJpaRepository{
 
 	@PersistenceContext
 	private EntityManager entityManager; 
+	
+	
 	
 	@Override
 	public Persona buscarPorId(Integer id) {
@@ -47,12 +50,42 @@ public class PersonJpaRespositoryImpl implements IPersonaJpaRepository{
 	}
 
 	@Override
+	public Persona busacarPorCedulaTyped(String cedula) {
+		TypedQuery<Persona> miTypèdQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.cedula= :datoCedula",Persona.class);
+		miTypèdQuery.setParameter("datoCedula", cedula);
+		return miTypèdQuery.getSingleResult();
+	}
+
+	@Override
+	public Persona busacarPorCedulaNamed(String cedula) {
+		Query myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedula");
+		myQuery.setParameter("datoCedula", cedula);
+		return (Persona) myQuery.getSingleResult();
+	}
+
+	@Override
+	public Persona busacarPorCedulaTypedNamed(String cedula) {
+		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedula",Persona.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	
+	@Override
 	public List<Persona> buscarPorApellido(String apellido) {
 		Query myQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.apellido= :datoApellido");
 		myQuery.setParameter("datoApellido", apellido);
 		return myQuery.getResultList();
 	}
 
+	@Override
+	public List<Persona> buscarPorNombreApellido(String nombre, String apellido) {
+		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedulaNombreApellido",Persona.class);
+		myQuery.setParameter("datoNombre", nombre);
+		myQuery.setParameter("datoApellido", apellido);
+		return myQuery.getResultList();
+	}
+	
 	@Override
 	public List<Persona> buscarPorNombre(String nombre) {
 		Query nombreQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.nombre= :datoNombre");
@@ -77,13 +110,13 @@ public class PersonJpaRespositoryImpl implements IPersonaJpaRepository{
 
 	@Override
 	public int eliminarPorGenero(String genero) {
-		
 		Query myQuery=this.entityManager.createQuery("DELETE FROM Persona p WHERE p.genero= :genero");
 		myQuery.setParameter("genero", genero);
 		return myQuery.executeUpdate();
-		
-	
 	}
+
+
+
 
 
 

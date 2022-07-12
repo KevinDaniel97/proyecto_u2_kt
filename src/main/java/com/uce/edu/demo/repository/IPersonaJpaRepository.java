@@ -15,11 +15,16 @@ public interface IPersonaJpaRepository {
 	public void eliminar(Integer id);
 	public List<Persona> buscarPorNombre(String nombre);
 	public List<Persona> buscarPorGenero(String genero);
-	
+	public  Persona busacarPorCedulaTyped(String cedula);
+	public  Persona busacarPorCedulaNamed(String cedula);
+	public List<Persona> buscarPorNombreApellido(String nombre, String apellido);
+
+
 	
 	
 	public int actualizarPorApellido(String genero,String apellido);
-	public int eliminarPorGenero(String genero); 
+	public int eliminarPorGenero(String genero);
+	public Persona busacarPorCedulaTypedNamed(String cedula); 
 
 	
 }
