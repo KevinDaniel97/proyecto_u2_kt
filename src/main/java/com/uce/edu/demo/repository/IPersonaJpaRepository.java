@@ -17,14 +17,14 @@ public interface IPersonaJpaRepository {
 	public List<Persona> buscarPorGenero(String genero);
 	public  Persona busacarPorCedulaTyped(String cedula);
 	public  Persona busacarPorCedulaNamed(String cedula);
+	public Persona busacarPorCedulaTypedNamed(String cedula); 
 	public List<Persona> buscarPorNombreApellido(String nombre, String apellido);
-
-
-	
-	
 	public int actualizarPorApellido(String genero,String apellido);
 	public int eliminarPorGenero(String genero);
-	public Persona busacarPorCedulaTypedNamed(String cedula); 
-
 	
+
+	public Persona buscarPorCedulaNative(String cedula);
+	public Persona buscarPorCedulaNamedNative(String cedula);
+	public Persona buscarPorCedulaCriteriaApi(String cedula);
+
 }
