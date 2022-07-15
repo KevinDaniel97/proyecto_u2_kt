@@ -90,6 +90,36 @@ public class EstidianteJpaRespositoryImpl implements IEstudianteJpaRepository{
 		return myQuery.getResultList();
 	}
 
+	@Override
+	public Estudiante buscarPorCedulaNative(String cedula) {
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE estu_cedula=:datoCedula",
+				Estudiante.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return (Estudiante) myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadNative(Integer edad) {
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE estu_edad=:datoEdad",
+				Estudiante.class);
+		myQuery.setParameter("datoEdad", edad);
+		return (List<Estudiante>) myQuery.getResultList();
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaNamedNative(String cedula) {
+		TypedQuery<Estudiante> myQuery=this.entityManager.createNamedQuery("Estudiante.buscarPorCedulaNative",Estudiante.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreNamedNative(String nombre) {
+		TypedQuery<Estudiante> myQuery=this.entityManager.createNamedQuery("Estudiante.buscarPorNombreNative",Estudiante.class);
+		myQuery.setParameter("datoNombre", nombre);
+		return myQuery.getResultList();
+	}
+
 
 	
 

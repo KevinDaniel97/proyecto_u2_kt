@@ -11,16 +11,17 @@ public interface IEstudianteJpaService {
 	public Estudiante buscarPorId(int id);
 	public void actualizar(Estudiante e);
 	public void eliminar(int id);
-	
 	public  Estudiante busacarPorCedulaTyped(String cedula);
 	public  Estudiante busacarPorEdadTyped(Integer edad);
-
 	public  Estudiante busacarPorCedulaNamed(String cedula);
 	public  Estudiante busacarPorEdadNamed(Integer edad);
-
 	public Estudiante busacarPorCedulaTypedNamed(String cedula); 
 	public Estudiante busacarPorEdadTypedNamed(Integer edad); 
-	
 	public List<Estudiante> buscarPorNombre(String nombre);
+	
+	public Estudiante buscarPorCedulaNative(String cedula);
+	public List<Estudiante> buscarPorEdadNative(Integer edad);
+	public Estudiante buscarPorCedulaNamedNative(String cedula);
+	public List<Estudiante> buscarPorNombreNamedNative(String nombre);
 
 }
