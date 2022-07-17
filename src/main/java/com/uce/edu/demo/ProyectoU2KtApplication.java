@@ -11,15 +11,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
 import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
-import com.uce.edu.demo.respository.modelo.Persona;
-import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2KtApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2KtApplication.class);
-	
+
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService iEstudianteJpaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2KtApplication.class, args);
@@ -29,29 +27,24 @@ public class ProyectoU2KtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		Estudiante estu1 = new Estudiante();
+		estu1.setApellido("Velez");
+		estu1.setNombre("Andy");
+		estu1.setCedula("100010");
+		estu1.setEdad(24);
+		// this.iEstudianteJpaService.guardar(estu1);
 
-		Persona per1=new Persona(); 
-		  per1.setApellido("Velez");
-		  per1.setNombre("daniel"); 
-		  per1.setCedula("34353535"); 
-		  per1.setGenero("M");
-		  //this.iPersonaJpaService.insertar(per1);
+		List<Estudiante> estCriteria = this.iEstudianteJpaService.buscarPorEdadCriterialApi(24);
+		for (Estudiante item : estCriteria) {
+			log.info("Estudiantes Criteria API consulta 1: " + item);
+		}
+		//si edad <=24 busca nombre o apellido y edad 
+		List<Estudiante> estCriteria2 = this.iEstudianteJpaService.buscarDinamicamente("Kevin", "Velez", 21);
+		for (Estudiante item : estCriteria2) {
+			log.info("Estudiantes Criteria API consulta 2: " + item);
+		}
+		
 
-
-//		  Persona perNative=this.iPersonaJpaService.buscarPorCedulaNative("120001");
-//		  log.info("Persona Native: "+perNative);
-//
-//		  Persona perNamedNative=this.iPersonaJpaService.buscarPorCedulaNamedNative("120001");
-//		  log.info("Persona NamedNative: "+perNamedNative);
-		  
-		  Persona perCriteria=this.iPersonaJpaService.buscarPorCedulaCriteriaApi("120001");
-		  log.info("Persona Criteria API: "+perCriteria);
-		  
-		  Persona perDinamica =this.iPersonaJpaService.buscarDinamicamente("Dario","Cayambe","M");
-		  log.info("Persona Dinamica: "+perDinamica);
-
-		 
-		  
 	}
 
 }

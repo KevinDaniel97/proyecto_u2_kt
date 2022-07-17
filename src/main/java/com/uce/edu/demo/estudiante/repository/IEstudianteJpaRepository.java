@@ -19,12 +19,13 @@ public interface IEstudianteJpaRepository {
 	public Estudiante busacarPorCedulaTypedNamed(String cedula); 
 	public Estudiante busacarPorEdadTypedNamed(Integer edad); 
 	public List<Estudiante> buscarPorNombre(String nombre);
-	
-	
 	public Estudiante buscarPorCedulaNative(String cedula);
 	public List<Estudiante> buscarPorEdadNative(Integer edad);
-	
 	public Estudiante buscarPorCedulaNamedNative(String cedula);
 	public List<Estudiante> buscarPorNombreNamedNative(String nombre);
+	
+	public List<Estudiante> buscarPorEdadCriterialApi(Integer edad);
+	public List<Estudiante> buscarDinamicamente(String nombre, String apellido,Integer edad);
 
+	
 }
