@@ -15,6 +15,10 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteContadorEdad;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteSencillo;
+import com.uce.edu.demo.respository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.respository.modelo.PersonaSencilla;
 @Repository
 @Transactional
 public class EstidianteJpaRespositoryImpl implements IEstudianteJpaRepository{
@@ -166,6 +170,19 @@ public class EstidianteJpaRespositoryImpl implements IEstudianteJpaRepository{
 	                .createQuery(myQuery);
 
 	        return myQueryFinal.getResultList();
+	}
+
+	@Override
+	public List<EstudianteSencillo> buscarPorEdadSencillo(Integer edad) {
+		TypedQuery<EstudianteSencillo> myQuery = this.entityManager.createQuery("SELECT NEW com.uce.edu.demo.estudiante.repository.modelo.EstudianteSencillo(p.apellido,p.edad) FROM Estudiante p WHERE p.edad= :datoEdad",EstudianteSencillo.class);
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<EstudianteContadorEdad> consultarCantidadPorEdad() {
+				TypedQuery<EstudianteContadorEdad> myQuery = this.entityManager.createQuery("SELECT  NEW com.uce.edu.demo.estudiante.repository.modelo.EstudianteContadorEdad( p.edad, p.nombre, COUNT(p.edad))  From Estudiante p WHERE p.edad <=25 GROUP BY p.edad,p.nombre ORDER BY p.edad",EstudianteContadorEdad.class);
+				return myQuery.getResultList();
 	}
 
 

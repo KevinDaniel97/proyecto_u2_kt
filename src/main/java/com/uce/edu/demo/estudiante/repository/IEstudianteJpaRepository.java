@@ -4,7 +4,8 @@ package com.uce.edu.demo.estudiante.repository;
 import java.util.List;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
-import com.uce.edu.demo.respository.modelo.Persona;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteContadorEdad;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteSencillo;
 
 public interface IEstudianteJpaRepository {
 
@@ -27,5 +28,6 @@ public interface IEstudianteJpaRepository {
 	public List<Estudiante> buscarPorEdadCriterialApi(Integer edad);
 	public List<Estudiante> buscarDinamicamente(String nombre, String apellido,Integer edad);
 
-	
+	public List<EstudianteSencillo> buscarPorEdadSencillo(Integer edad);
+	public List<EstudianteContadorEdad> consultarCantidadPorEdad();
 }

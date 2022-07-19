@@ -10,18 +10,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteContadorEdad;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteSencillo;
 import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
-import com.uce.edu.demo.respository.modelo.Persona;
 import com.uce.edu.demo.respository.modelo.PersonaContadorGenero;
 import com.uce.edu.demo.respository.modelo.PersonaSencilla;
-import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2KtApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2KtApplication.class);
 
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService iEstudianteJpaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2KtApplication.class, args);
@@ -30,23 +30,25 @@ public class ProyectoU2KtApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		Estudiante estu1 = new Estudiante();
+		estu1.setApellido("Teran");
+		estu1.setNombre("Juan");
+		estu1.setCedula("100013");
+		estu1.setEdad(26);
+		//this.iEstudianteJpaService.guardar(estu1);
 
-		Persona per1=new Persona(); 
-		per1.setApellido("Chavez");
-		per1.setNombre("Dayana"); 
-		per1.setCedula("100011"); 
-		per1.setGenero("F");
-		//this.iPersonaJpaService.insertar(per1);
 
-
-		List<PersonaSencilla> listaPersona =this.iPersonaJpaService.buscarPorApellidoSencillo("Ayala");
-		for(PersonaSencilla perItem : listaPersona) {
-			log.info("List Persona Sencilla: "+listaPersona);
-		}
-
-		List<PersonaContadorGenero> milistaContadorGenero =this.iPersonaJpaService.consultarCantidadPorGenero();
-			log.info("List Persona Contador Genero: "+milistaContadorGenero);
-		
+	List<EstudianteSencillo> estSencillo = this.iEstudianteJpaService.buscarPorEdadSencillo(21);
+	for (EstudianteSencillo item : estSencillo) {
+		log.info("Estudiantes Sencillo: " + estSencillo);
 	}
+	List<EstudianteContadorEdad> estContador = this.iEstudianteJpaService.consultarCantidadPorEdad();
+		log.info("Estudiante cantidad Edad:\n" +estContador );
+	
+	
+	
+	
+	}
+	
 
 }
