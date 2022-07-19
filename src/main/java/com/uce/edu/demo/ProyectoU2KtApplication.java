@@ -11,13 +11,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
 import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
+import com.uce.edu.demo.respository.modelo.Persona;
+import com.uce.edu.demo.respository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.respository.modelo.PersonaSencilla;
+import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2KtApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2KtApplication.class);
 
 	@Autowired
-	private IEstudianteJpaService iEstudianteJpaService;
+	private IPersonaJpaService iPersonaJpaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2KtApplication.class, args);
@@ -27,24 +31,22 @@ public class ProyectoU2KtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Estudiante estu1 = new Estudiante();
-		estu1.setApellido("Velez");
-		estu1.setNombre("Andy");
-		estu1.setCedula("100010");
-		estu1.setEdad(24);
-		// this.iEstudianteJpaService.guardar(estu1);
+		Persona per1=new Persona(); 
+		per1.setApellido("Chavez");
+		per1.setNombre("Dayana"); 
+		per1.setCedula("100011"); 
+		per1.setGenero("F");
+		//this.iPersonaJpaService.insertar(per1);
 
-		List<Estudiante> estCriteria = this.iEstudianteJpaService.buscarPorEdadCriterialApi(24);
-		for (Estudiante item : estCriteria) {
-			log.info("Estudiantes Criteria API consulta 1: " + item);
+
+		List<PersonaSencilla> listaPersona =this.iPersonaJpaService.buscarPorApellidoSencillo("Ayala");
+		for(PersonaSencilla perItem : listaPersona) {
+			log.info("List Persona Sencilla: "+listaPersona);
 		}
-		//si edad <=24 busca nombre o apellido y edad 
-		List<Estudiante> estCriteria2 = this.iEstudianteJpaService.buscarDinamicamente("Kevin", "Velez", 21);
-		for (Estudiante item : estCriteria2) {
-			log.info("Estudiantes Criteria API consulta 2: " + item);
-		}
+
+		List<PersonaContadorGenero> milistaContadorGenero =this.iPersonaJpaService.consultarCantidadPorGenero();
+			log.info("List Persona Contador Genero: "+milistaContadorGenero);
 		
-
 	}
 
 }
