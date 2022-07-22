@@ -1,6 +1,7 @@
 package com.uce.edu.demo;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.uce.edu.demo.repository.ICiudadanoRepository;
 import com.uce.edu.demo.respository.modelo.Ciudadano;
 import com.uce.edu.demo.respository.modelo.Empleado;
+import com.uce.edu.demo.respository.modelo.Pasaporte;
 import com.uce.edu.demo.respository.modelo.Persona;
 import com.uce.edu.demo.service.ICiudadanoService;
 import com.uce.edu.demo.service.IPersonaJpaService;
@@ -30,30 +32,40 @@ public class ProyectoU2KtApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
 		Ciudadano ciu1=new Ciudadano(); 
-		ciu1.setNombre("Kevin"); 
-		ciu1.setApellido("Toapanta");
+		ciu1.setNombre("Mario"); 
+		ciu1.setApellido("Bross");
+		ciu1.setCedula("105");
+		ciu1.setFechaNacimiento(LocalDateTime.of(2002,12,10,0,0));
 		
-		Empleado empl1 =new Empleado();
-		empl1.setCodigoIess("100001");
-		empl1.setSalario(new BigDecimal(1200));
-		empl1.setCiudadano(ciu1);
-	
-		ciu1.setEmpleado(empl1);
+		Pasaporte pasa1 =new Pasaporte();
+		pasa1.setNumero("1001");
+		pasa1.setFechaEmision(LocalDateTime.of(2021, 10,10,0,0));
+		pasa1.setFechaCaducidad(LocalDateTime.of(2022, 10,10,0,0));
+		ciu1.setPasaporte(pasa1);
 		
+		//guardar
 		this.iCiudadanoService.insertar(ciu1);
-
+		log.info("Guarda ciudadano: "+ciu1);
+		
+		
 		Ciudadano ciu2=new Ciudadano(); 
-		ciu2.setNombre("Dario2"); 
+		ciu2.setNombre("Kevin2"); 
 		ciu2.setApellido("Toapanta2");
+		ciu2.setCedula("1010");
+		ciu2.setFechaNacimiento(LocalDateTime.of(2002,12,10,0,0));
 		
-		Empleado empl2 =new Empleado();
-		empl2.setCodigoIess("1231542");
-		empl2.setSalario(new BigDecimal(100));
-		empl2.setCiudadano(ciu2);
+		//actualizar
+		this.iCiudadanoService.actualizar(ciu2);
+		log.info("actualizo ciudadano  : "+ciu2);
+
+		//buscar
+		log.info("Busca ciudadano por Id: "+this.iCiudadanoService.buscarPorId(7));
 		
-		ciu2.setEmpleado(empl2);
-		//this.iCiudadanoService.insertar(ciu2);
+		//eliminar
+		this.iCiudadanoService.eliminar(3);
+		log.info("se elimino ciudadano de id: 3");
 
 	
 	}
