@@ -1,4 +1,4 @@
-package com.uce.edu.demo.respository.modelo;
+package com.uce.edu.demo.respository.modelo.onetoone;
 
 import java.time.LocalDateTime;
 

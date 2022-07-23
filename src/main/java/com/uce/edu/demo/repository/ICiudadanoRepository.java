@@ -1,6 +1,6 @@
 package com.uce.edu.demo.repository;
 
-import com.uce.edu.demo.respository.modelo.Ciudadano;
+import com.uce.edu.demo.respository.modelo.onetoone.Ciudadano;
 
 public interface ICiudadanoRepository {
 
