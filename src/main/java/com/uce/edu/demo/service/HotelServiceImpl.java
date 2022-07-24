@@ -21,8 +21,9 @@ public class HotelServiceImpl implements IHotelService{
 	
 	@Override
 	public void insetar(Hotel hotel) {
-//		List<Habitacion> habitaciones=hotel.getHabitaciones();	
-//		hotel.setHabitaciones(null);
+		
+		//List<Habitacion> habitaciones=hotel.getHabitaciones();	
+		//hotel.setHabitaciones(null);
 		this.iHotelRepository.insetar(hotel);
 		
 //		//#############################################################
@@ -33,8 +34,8 @@ public class HotelServiceImpl implements IHotelService{
 //			//CALCULOS
 //			habiItem.setHotel(hotelBuscado);
 //			this.ihabitacionRepository.insertar(habiItem);
-
-		}
+//		}
+		
 	}
 
 }
