@@ -1,12 +1,16 @@
-package com.uce.edu.demo.autor.modelo;
+package com.uce.edu.demo.respository.modelo.manytomany;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,22 +27,14 @@ public class Libro {
 	@Column(name = "libr_titulo")
 	private String titulo;
 	
-	@Column(name = "libr_editorial")
-	private String editorial;
+	@Column(name = "libr_cantidad_paginas")
+	private Integer cantidadPaginas;
 	
-	@Column(name = "libr_genero")
-	private String genero;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="libro_autor",joinColumns = @JoinColumn(name="liau_id_libro"),inverseJoinColumns = @JoinColumn(name="liau_id_autor"))//libro primero por que elejimos la tabla principal, no necesariamente
+	private Set<Autor> autores;
 	
-	@ManyToOne
-	@JoinColumn(name="libr_id_autor")
-	private Autor autor;
-
-	
-	@Override
-	public String toString() {
-		return "Libro [id=" + id + ", titulo=" + titulo + ", editorial=" + editorial + ", genero=" + genero + "]";
-	}
-
+	//set y get
 	public Integer getId() {
 		return id;
 	}
@@ -55,30 +51,23 @@ public class Libro {
 		this.titulo = titulo;
 	}
 
-	public String getEditorial() {
-		return editorial;
+	public Integer getCantidadPaginas() {
+		return cantidadPaginas;
 	}
 
-	public void setEditorial(String editorial) {
-		this.editorial = editorial;
+	public void setCantidadPaginas(Integer cantidadPaginas) {
+		this.cantidadPaginas = cantidadPaginas;
 	}
 
-	public String getGenero() {
-		return genero;
+	public Set<Autor> getAutores() {
+		return autores;
 	}
 
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setAutores(Set<Autor> autores) {
+		this.autores = autores;
 	}
 
-	public Autor getAutor() {
-		return autor;
-	}
 
-	public void setAutor(Autor autor) {
-		this.autor = autor;
-	}
-	
 	
 	
 }
