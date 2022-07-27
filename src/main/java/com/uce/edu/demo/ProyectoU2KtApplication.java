@@ -1,12 +1,17 @@
 package com.uce.edu.demo;
 
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.demo.cajero.modelo.DetalleFactura;
+import com.uce.edu.demo.cajero.modelo.Factura;
+import com.uce.edu.demo.cajero.service.IFacturaService;
 import com.uce.edu.demo.respository.modelo.deber.onetomany.Autor2;
 import com.uce.edu.demo.respository.modelo.deber.onetomany.Libro2;
 import com.uce.edu.demo.respository.modelo.deber.onetomany.LibroAutor2;
@@ -21,13 +26,7 @@ public class ProyectoU2KtApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2KtApplication.class);
 
 	@Autowired
-	private ILibro2Service iLibro2Service;
-
-	@Autowired
-	private IAutor2Service iAutor2Service;
-	
-	@Autowired
-	private ILibroAutor2Service iLibroAutor2Service;
+	private IFacturaService iFacturaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2KtApplication.class, args);
@@ -37,28 +36,16 @@ public class ProyectoU2KtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-	Libro2 libro2=new Libro2();
-	libro2.setTitulo("soledad");
-	libro2.setCantidadPaginas(100);
-	this.iLibro2Service.insertar(libro2);
-
-	Autor2 autor2=new Autor2();
-	autor2.setNombre("Newton3");
-	this.iAutor2Service.insertar(autor2);
+		Factura fact=this.iFacturaService.consultar(1);
 	
-	Autor2 autor3= new Autor2();
-	autor3.setNombre("Newton3");
-	this.iAutor2Service.insertar(autor3);
-
-	LibroAutor2 libroAutor2 = new LibroAutor2();
-	libro2.setId(1);
-	autor2.setId(1);
-	libroAutor2.setAutor2(autor2);
-	libroAutor2.setLibro2(libro2);
+		log.info("Numero: "+fact.getNumero());
+		log.info("decha: "+fact.getFecha());
+		log.info("cliente: "+fact.getCliente().getNumeroTarjeta());
 	
-	this.iLibroAutor2Service.insertar(libroAutor2);
-	
-
+		List<DetalleFactura> detalles = fact.getDetalles();
+		for(DetalleFactura deta:detalles) {
+			log.info("detalle: "+deta);
+		}
 	
 	}
 	
