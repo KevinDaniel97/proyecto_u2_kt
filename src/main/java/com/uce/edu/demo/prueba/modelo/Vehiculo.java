@@ -1,14 +1,18 @@
 package com.uce.edu.demo.prueba.modelo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name= "vehiculo")
@@ -28,6 +32,9 @@ public class Vehiculo {
 	@Column(name= "vehi_precio")
 	private BigDecimal precio;
 
+	@OneToOne(mappedBy="vehiculo")
+	private Matricula matricula;
+
 	
 	@Override
 	public String toString() {
@@ -36,12 +43,12 @@ public class Vehiculo {
 	}
 
 	// SET y GET
-	public String getMarca() {
-		return marca;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setMarca(String marca) {
-		this.marca = marca;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getPlaca() {
@@ -50,6 +57,14 @@ public class Vehiculo {
 
 	public void setPlaca(String placa) {
 		this.placa = placa;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
 
 	public String getTipo() {
@@ -68,13 +83,17 @@ public class Vehiculo {
 		this.precio = precio;
 	}
 
-	public Integer getId() {
-		return id;
+	public Matricula getMatricula() {
+		return matricula;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
 	}
+
+	
+
+
 
 	
 }

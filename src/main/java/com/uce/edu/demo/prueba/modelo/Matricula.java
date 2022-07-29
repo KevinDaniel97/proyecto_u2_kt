@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,25 +23,38 @@ public class Matricula {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "matr_id_sec")
 	@SequenceGenerator(name="matr_id_sec",sequenceName = "matr_id_sec",allocationSize = 1)
 	private Integer id;
-	//@Column(name= "matr_propietario")
-	//private Propietario propietario;
-	//@Column(name= "matr_vehiculo")
-	//private Vehiculo vehiculo;
-	@Column(name= "matr_fechaMatricula")
+
+	@Column(name= "matr_fecha_matricula")
 	private LocalDateTime fechaMatricula;
-	@Column(name= "matr_valorMatricula")
+	
+	@Column(name= "matr_valor_matricula")
 	private BigDecimal valorMatricula;
-
-
+	
+	@ManyToOne
+	@JoinColumn(name="matr_prop_id")
+	private Propietario propietario;
+	
+	@OneToOne
+	@JoinColumn(name="vehi_prop_id")
+	private Vehiculo vehiculo;
+	
 	
 
 	@Override
 	public String toString() {
-		return "Matricula [id=" + id + ", propietario="  + ", vehiculo="  + ", fechaMatricula="
-				+ fechaMatricula + ", valorMatricula=" + valorMatricula + "]";
+		return "Matricula [id=" + id + ", fechaMatricula=" + fechaMatricula + ", valorMatricula=" + valorMatricula
+				+ "]";
 	}
 
 	// SET y GET
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public LocalDateTime getFechaMatricula() {
 		return fechaMatricula;
 	}
@@ -54,7 +70,7 @@ public class Matricula {
 	public void setValorMatricula(BigDecimal valorMatricula) {
 		this.valorMatricula = valorMatricula;
 	}
-/*
+
 	public Propietario getPropietario() {
 		return propietario;
 	}
@@ -70,14 +86,8 @@ public class Matricula {
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
-*/
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
 	
 
 }

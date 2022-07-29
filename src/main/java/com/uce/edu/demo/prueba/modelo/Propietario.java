@@ -1,12 +1,14 @@
 package com.uce.edu.demo.prueba.modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,9 +28,13 @@ public class Propietario {
 	private String apellido;
 	@Column(name="prop_cedula")
 	private String cedula;
-	@Column(name="prop_fechaNacimiento")
+	@Column(name="prop_fecha_nacimiento")
 	private LocalDateTime fechaNacimiento;
 
+	@OneToMany(mappedBy="propietario")
+	private List<Matricula> matriculas;
+	
+	
 
 	@Override
 	public String toString() {
@@ -36,7 +42,15 @@ public class Propietario {
 				+ ", fechaNacimiento=" + fechaNacimiento + "]";
 	}
 
-	// SET y GET
+	//set y get
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -69,13 +83,15 @@ public class Propietario {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public Integer getId() {
-		return id;
+	public List<Matricula> getMatriculas() {
+		return matriculas;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 
 	
+
+
 }
