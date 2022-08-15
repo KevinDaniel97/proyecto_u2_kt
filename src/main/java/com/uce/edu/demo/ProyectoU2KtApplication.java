@@ -3,7 +3,6 @@ package com.uce.edu.demo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +10,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.cajero.modelo.DetalleFactura;
-import com.uce.edu.demo.cajero.modelo.Factura;
-import com.uce.edu.demo.cajero.service.IFacturaService;
 import com.uce.edu.demo.prueba.modelo.Propietario;
 import com.uce.edu.demo.prueba.modelo.Vehiculo;
 import com.uce.edu.demo.prueba.service.IMatriculaGestorService;
 import com.uce.edu.demo.prueba.service.IPropietarioService;
 import com.uce.edu.demo.prueba.service.IVehiculoService;
-import com.uce.edu.demo.respository.modelo.deber.onetomany.Autor2;
-import com.uce.edu.demo.respository.modelo.deber.onetomany.Libro2;
-import com.uce.edu.demo.respository.modelo.deber.onetomany.LibroAutor2;
-import com.uce.edu.demo.service.IPersonaJpaService;
-import com.uce.edu.demo.service.deber.onetomany.IAutor2Service;
-import com.uce.edu.demo.service.deber.onetomany.ILibro2Service;
-import com.uce.edu.demo.service.deber.onetomany.ILibroAutor2Service;
 
 
 
